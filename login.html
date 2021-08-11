@@ -1,53 +1,97 @@
-<!DOCTYPE html>
-<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<html lang="en">
+<!Doctype html>
+<html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="webfonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="css/login/owl.carousel.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/login/bootstrap.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="css/login/style.css">
+
   <title>eMercado - Todo lo que busques está aquí</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    html, body{
-      height: 100%;
-    }
-
-    body {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    .signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-  </style>
 </head>
 
-<body class="text-center">
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 08/08/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+<body>
+  <!-- Alerta de campos vacios -->
+  <div class="modal" id="alertaError">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header alert alert-danger">
+          <h2 class="modal-title text-dark">Campos vacios</h2>
+          <button class="close" type="button" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body">
+          <p class="text-body">Complete los campos</p>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- Alerta de campos vacios -->
 
-  <script src="js/init.js"></script>
+  <div class="d-md-flex half">
+    <div class="bg" style="background-image: url('img/bg_1.jpg');"></div>
+    <div class="contents">
+
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-12">
+            <div class="form-block mx-auto">
+              <div class="text-center mb-5">
+                <h3 class="text-uppercase">Inicio de sesión</h3>
+              </div>
+              <form action="#">
+                <div class="form-group first">
+                  <label for="usuario">Usuario</label>
+                  <input type="email" class="form-control" placeholder="tu-email@gmail.com" id="usuario">
+                </div>
+                <div class="form-group last mb-3">
+                  <label for="contrasenia">Contraseña</label>
+                  <input type="password" class="form-control" placeholder="Tu contraseña" id="contrasenia">
+                </div>
+
+                <div class="d-sm-flex mb-5 align-items-center">
+                  <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Recordarme</span>
+                    <input type="checkbox" checked="checked" />
+                    <div class="control__indicator"></div>
+                  </label>
+                  <span class="ml-auto"><a href="#" class="forgot-pass">Olvide la contraseña</a></span>
+                </div>
+
+                <button type="button" value="Iniciar sesión" class="btn btn-block py-2 btn-primary" onClick="verificarCampos();">Iniciar sesión</button>
+
+                <span class="text-center my-3 d-block">or</span>
+
+                <div class="">
+                  <a href="#" class="btn btn-block py-2 btn-facebook">
+                    <span class="icon-facebook mr-3"></span> Iniciar sesión con Facebook
+                  </a>
+                  <a href="#" class="btn btn-block py-2 btn-google"><span class="icon-google mr-3"></span> Iniciar sesión con Google</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/login.js"></script>
 </body>
+
 </html>
