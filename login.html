@@ -60,13 +60,13 @@
 
                 <div class="d-sm-flex mb-5 align-items-center">
                   <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Recordarme</span>
-                    <input type="checkbox" checked="checked" />
+                    <input id="chkRecordar" type="checkbox" checked="checked" />
                     <div class="control__indicator"></div>
                   </label>
                   <span class="ml-auto"><a href="#" class="forgot-pass">Olvide la contraseña</a></span>
                 </div>
 
-                <button type="button" value="Iniciar sesión" class="btn btn-block py-2 btn-primary" onClick="verificarCampos();">Iniciar sesión</button>
+                <button id="btnIniciar" type="button" value="Iniciar sesión" class="btn btn-block py-2 btn-primary" onclick="iniciarSesion();" data-trigger="focus" data-placement="top" data-content="Ingrese un email válido.">Iniciar sesión</button>
 
                 <span class="text-center my-3 d-block">or</span>
 
@@ -91,6 +91,7 @@
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/init.js"></script>
   <script src="js/login.js"></script>
 </body>
 
