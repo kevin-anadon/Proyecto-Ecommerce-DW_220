@@ -24,7 +24,7 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-        <a class="py-2 d-none d-md-inline-block" href="login.html" onclick="desconectar()">Cerrar sesión</a>
+        <a class="py-2 d-none d-md-inline-block" href="login.html" onclick="cerrarSesion()">Cerrar sesión</a>
       </div>
     </nav>
     <main role="main">
@@ -106,30 +106,10 @@
         <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
       </div>
     </footer>
-    <script>
-
-    function desconectar(){
-      cerrarSesion();
-      // Google signOut
-      if(gapi.auth2 != undefined){googleSignOut();}
-      location.href = "./login.html";
-    }
-
-    function googleSignOut(){
-      let auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-       console.log('User signed out.');
-     });
-    }
-
-    function onLoad() {
-      gapi.load('auth2', function() {
-        gapi.auth2.init();
-      });
-    }
-    </script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
+    <script src="js/signout.js"></script>
+    <script src="js/google.js"></script>
   </body>
 </html>

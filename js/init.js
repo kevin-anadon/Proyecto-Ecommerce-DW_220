@@ -40,19 +40,6 @@ var getJSONData = function(url){
     });
 }
 
-function cerrarSesion(){
-  let user = {};
-  if(localStorage.getItem('recordar') === 'true'){
-    user = JSON.parse(localStorage.getItem('user'));
-    user.conectado = false;
-    localStorage.setItem('user', JSON.stringify(user));
-  }else{
-    user = JSON.parse(sessionStorage.getItem('user'));
-    user.conectado = false;
-    sessionStorage.setItem('user', JSON.stringify(user));
-  }
-}
-
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
