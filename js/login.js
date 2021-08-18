@@ -13,11 +13,36 @@ $(function() {
 
 });
 
-const iniciarSesion = () => {
+function recordarSesion(user,recordar){
+  if(recordar){
+    localStorage.setItem('recordar', 'true');
+    localStorage.setItem('user',JSON.stringify(user));
+  }else{
+    localStorage.setItem('recordar', 'false');
+    sessionStorage.setItem('user',JSON.stringify(user));
+  }
+}
+
+function crearUsuario(usuario,contrasenia){
   let user = {}
-  // En caso de que esté seleccionada la casilla de Recordarme
-  // Guardo en la variable recordarSesion, localStorage de no ser así guardo sessionStorage
-  let storage =  document.getElementById('chkRecordar').checked ? window.localStorage : window.sessionStorage;
+  user.email = usuario;
+  user.contrasenia = contrasenia;
+  user.conectado = true;
+  recordarSesion(user,document.getElementById('chkRecordar').checked);
+}
+
+function iniciarConGoogle(googleUser) {
+      /* PARA UTILIZAR LUEGO
+      // The ID token you need to pass to your backend:
+      var id_token = googleUser.getAuthResponse().id_token;
+      */
+      // Variable que contiene al usuario de google
+      let profile = googleUser.getBasicProfile();
+      crearUsuario(profile.getEmail(),profile.getName());
+      location.href = "./index.html";
+}
+
+function iniciarSesion(){
   let usuario = document.getElementById('usuario').value;
   let contrasenia = document.getElementById('contrasenia').value;
   if(verificarCampos(usuario, contrasenia)){
@@ -25,13 +50,8 @@ const iniciarSesion = () => {
   }else{
     if(emailValido(usuario)){
       $('#btnIniciar').popover('hide');
-      user.email = usuario;
-      user.contrasenia = contrasenia;
-      user.connected = true;
-      console.log("Prueba1");
-      storage.setItem('user',JSON.stringify(user));
-      return console.log("Prueba2");
-      location.href = "./index.html"
+      crearUsuario(usuario,contrasenia);
+      location.href = "./index.html";
     }else{
       $('#btnIniciar').popover('show');
     }

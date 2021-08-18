@@ -40,10 +40,17 @@ var getJSONData = function(url){
     });
 }
 
-const cerrarSesion = () => {
-  let user = JSON.parse(localStorage.getItem('user'));
-  user.connected = false;
-  localStorage.setItem('user', JSON.stringify(user));
+function cerrarSesion(){
+  let user = {};
+  if(localStorage.getItem('recordar') === 'true'){
+    user = JSON.parse(localStorage.getItem('user'));
+    user.conectado = false;
+    localStorage.setItem('user', JSON.stringify(user));
+  }else{
+    user = JSON.parse(sessionStorage.getItem('user'));
+    user.conectado = false;
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
   location.href = './login.html'
 }
 
@@ -51,10 +58,22 @@ const cerrarSesion = () => {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", (e) =>{
-  let user = JSON.parse(localStorage.getItem('user'));
-  if(!user.connected && location.href.indexOf('login') == -1){
-    location.href = './login.html';
-  }else if(user.connected && location.href.indexOf('login') != -1){
-    location.href = './index.html';
+  let user = {};
+  if(localStorage.getItem('recordar') === 'true'){
+    user = JSON.parse(localStorage.getItem('user'));
+  }else{
+    user = JSON.parse(sessionStorage.getItem('user'));
+  }
+
+  if(user != null){
+    if(!user.conectado && location.href.indexOf('login') == -1){
+      location.href = './login.html';
+    }else if(user.conectado && location.href.indexOf('login') != -1){
+      location.href = './index.html';
+    }
+  }else{
+    if(location.href.indexOf('login') == -1){
+      location.href = './login.html';
+    }
   }
 });

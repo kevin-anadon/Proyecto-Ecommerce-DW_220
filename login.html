@@ -5,6 +5,11 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Google Oauth -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="248612205064-44cri76i4vjos5r0i3ise0njco0gsg6k.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js"  async defer></script>
+
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="webfonts/icomoon/style.css">
@@ -66,7 +71,7 @@
                   <span class="ml-auto"><a href="#" class="forgot-pass">Olvide la contraseña</a></span>
                 </div>
 
-                <button id="btnIniciar" type="button" value="Iniciar sesión" class="btn btn-block py-2 btn-primary" onclick="iniciarSesion();" data-trigger="focus" data-placement="top" data-content="Ingrese un email válido.">Iniciar sesión</button>
+                <button id="btnIniciar" type="button" value="Iniciar sesión" class="btn btn-block py-2 btn-primary" onclick="iniciarSesion();" data-trigger="focus" data-placement="top" data-content="Ingrese una direccion de correo válida.">Iniciar sesión</button>
 
                 <span class="text-center my-3 d-block">or</span>
 
@@ -74,7 +79,7 @@
                   <a href="#" class="btn btn-block py-2 btn-facebook">
                     <span class="icon-facebook mr-3"></span> Iniciar sesión con Facebook
                   </a>
-                  <a href="#" class="btn btn-block py-2 btn-google"><span class="icon-google mr-3"></span> Iniciar sesión con Google</a>
+                  <a href="#" class="btn btn-block py-2 btn-google" data-onsuccess="iniciarConGoogle" data-theme="dark"><span class="icon-google mr-3"></span> Iniciar sesión con Google</a>
                 </div>
               </form>
             </div>
@@ -83,10 +88,7 @@
       </div>
     </div>
 
-
   </div>
-
-
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
