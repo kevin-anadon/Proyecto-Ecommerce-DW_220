@@ -10,6 +10,10 @@ function cerrarSesion(){
     sessionStorage.setItem('user', JSON.stringify(user));
   }
   // Google signOut
-  if(gapi.auth2 != undefined){googleSignOut();}
+  if(gapi.auth2 != undefined){
+    console.log("Sasda");
+    googleSignOut();
+    console.log("Salio de google");
+  }
   location.href = "./login.html";
 }
