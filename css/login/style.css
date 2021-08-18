@@ -154,14 +154,6 @@ h2 {
   background-color: #7e0cf5;
   opacity: .2; }
 
-.g-signin2 {
-  text-decoration: none !important;
-  display: block;
-  border-radius: 1px;
-  width: 420px;
-  height: 42px;
-}
-
 .btn {
   text-decoration: none !important; }
   .btn.btn-facebook {
