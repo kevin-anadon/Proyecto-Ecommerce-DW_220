@@ -4,23 +4,17 @@ function statusChangeCallback(response) {  // Called with the results from FB.ge
   let usuario = '' ;
   let nombre = '';
   if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-    FB.api('/me',(response) => {
-      usuario = response.email;
-      nombre = response.name;
+    testAPI();
+    //FB.api('/me',(response) => {
+    //  usuario = response.email;
+    //  nombre = response.name;
     });
-    iniciarConFacebook(usuario,nombre);
+    console.log(usuario);
+    //iniciarConFacebook(usuario,nombre);
   } else {                                 // Not logged into your webpage or we are unable to tell.
     //no conectado
   }
 }
-
-
-function checkLoginState() {               // Called when a person is finished with the Login Button.
-  FB.getLoginStatus(function(response) {   // See the onlogin handler
-    statusChangeCallback(response);
-  });
-}
-
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -35,3 +29,10 @@ window.fbAsyncInit = function() {
     statusChangeCallback(response);        // Returns the login status.
   });
 };
+
+function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+   console.log('Welcome!  Fetching your information.... ');
+   FB.api('/me', function(response) {
+     return console.log('Successful login for: ' + response.name);
+   });
+ }
