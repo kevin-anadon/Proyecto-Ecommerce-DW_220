@@ -24,10 +24,10 @@ function checkLoginState() {               // Called when a person is finished w
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '{app-id}',
+    appId      : '832729297606995',
     cookie     : true,                     // Enable cookies to allow the server to access the session.
     xfbml      : true,                     // Parse social plugins on this webpage.
-    version    : '{api-version}'           // Use this Graph API version for this call.
+    version    : 'v3.2'           // Use this Graph API version for this call.
   });
 
 
