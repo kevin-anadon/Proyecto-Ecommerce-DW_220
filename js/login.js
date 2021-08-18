@@ -8,9 +8,6 @@ $(function() {
   $('.collapse').on('hidden.bs.collapse', function () {
 	  $(this).closest('.accordion-item').removeClass('active');
 	});
-
-
-
 });
 
 function recordarSesion(user,recordar){
@@ -39,6 +36,11 @@ function iniciarConGoogle(googleUser) {
       // Variable que contiene al usuario de google
       let profile = googleUser.getBasicProfile();
       crearUsuario(profile.getEmail(),profile.getName());
+      location.href = "./index.html";
+}
+
+function iniciarConFacebook(usuario,nombre) {      
+      crearUsuario(usuario,nombre);
       location.href = "./index.html";
 }
 
