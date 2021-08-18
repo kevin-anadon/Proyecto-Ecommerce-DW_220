@@ -51,7 +51,6 @@ function cerrarSesion(){
     user.conectado = false;
     sessionStorage.setItem('user', JSON.stringify(user));
   }
-  location.href = './login.html'
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
