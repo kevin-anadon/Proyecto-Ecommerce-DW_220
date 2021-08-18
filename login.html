@@ -8,10 +8,6 @@
   <!-- Google Oauth -->
   <meta name="google-signin-scope" content="profile email">
   <meta name="google-signin-client_id" content="248612205064-44cri76i4vjos5r0i3ise0njco0gsg6k.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-  <!-- Facebook Oauth -->
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v11.0&appId=832729297606995&autoLogAppEvents=1" nonce="NXe6KyF5"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
@@ -79,10 +75,9 @@
                 <span class="text-center my-3 d-block">o</span>
 
                 <div class="Oauths">
-                  <div class="fb-login-button btn-block py-2" onlogin="checkLoginState();" data-width="420" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                  <!--<a href="#" class="btn btn-block py-2 btn-facebook">
+                  <a href="#" class="btn btn-block py-2 btn-facebook">
                     <span class="icon-facebook mr-3"></span> Iniciar sesión con Facebook
-                  </a>-->
+                  </a>
                   <div class="btn-block py-2 g-signin2" data-onsuccess="iniciarConGoogle" data-width="420px" data-height="42px" data-theme="dark"></div>
                 </div>
               </form>
@@ -100,6 +95,7 @@
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
   <script src="js/facebook.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
 </html>

@@ -39,9 +39,8 @@ function iniciarConGoogle(googleUser) {
       location.href = "./index.html";
 }
 
-function iniciarConFacebook(usuario,nombre) {      
-      crearUsuario(usuario,nombre);
-      location.href = "./index.html";
+function iniciarConFacebook(facebookUser) {
+  // Completar luego
 }
 
 function iniciarSesion(){
