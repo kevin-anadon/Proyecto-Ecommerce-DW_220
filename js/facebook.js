@@ -1,6 +1,6 @@
 function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
   if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-    testAPI();
+    fbUserLogin();
   } else {                                 // Not logged into your webpage.
 
   }
@@ -28,7 +28,7 @@ window.fbAsyncInit = () => {
   });
 };
 
-function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+function fbUserLogin() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   FB.api('/me', 'GET',{"fields":"email,first_name,last_name,id,gender"},
   (response) => {
     iniciarConFacebook(response);
