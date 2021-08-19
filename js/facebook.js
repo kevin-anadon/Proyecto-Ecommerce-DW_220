@@ -29,7 +29,8 @@ window.fbAsyncInit = () => {
 };
 
 function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-  FB.api('/me', (response) => {
+  FB.api('/me', 'GET',{"fields":"email,first_name,last_name,id,gender"},
+  (response) => {
     iniciarConFacebook(response);
   });
 }
