@@ -30,9 +30,7 @@ window.fbAsyncInit = () => {
 
 function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   FB.api('/me', (response) => {
-    let usuario = response.email;
-    let nombre = response.name;
-    console.log(usuario,nombre);
+    iniciarConFacebook(response);
   });
 }
 

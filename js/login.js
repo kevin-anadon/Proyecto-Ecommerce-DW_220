@@ -40,7 +40,8 @@ function iniciarConGoogle(googleUser) {
 }
 
 function iniciarConFacebook(facebookUser) {
-  // Completar luego
+  crearUsuario(facebookUser.email,facebookUser.name);
+  location.href = "./index.html";
 }
 
 function iniciarSesion(){

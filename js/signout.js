@@ -1,5 +1,6 @@
 function cerrarSesion(){
   let user = {};
+  let facebookAuth = {};
   if(localStorage.getItem('recordar') === 'true'){
     user = JSON.parse(localStorage.getItem('user'));
     user.conectado = false;
@@ -11,8 +12,9 @@ function cerrarSesion(){
     sessionStorage.setItem('user', JSON.stringify(user));
   }
   // Google signOut
-  if(gapi.auth2 != undefined){
-    googleSignOut();
-  }
+  if(gapi.auth2 != undefined){googleSignOut();}
+  // Facebook signOut
+  facebookAuth = JSON.parse(sessionStorage.getItem('fbssls_832729297606995'));
+  if(facebookAuth != undefined && facebookAuth.status === 'connected' ){facebookSignOut();};
   location.href = "./login.html";
 }
