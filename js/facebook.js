@@ -17,6 +17,11 @@ window.fbAsyncInit = () => {
     xfbml      : true,                     // Parse social plugins on this webpage.
     version    : 'v11.0'                   // Use this Graph API version for this call.
   });
+
+
+  FB.getLoginStatus( (response) => {       // Called after the JS SDK has been initialized.
+    statusChangeCallback(response);        // Returns the login status.
+  });
 };
 
 function fbUserLogin() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
