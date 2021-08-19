@@ -1,9 +1,5 @@
-function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-  if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-    fbUserLogin();
-  } else {                                 // Not logged into your webpage.
-
-  }
+function statusChangeCallback(response) {                      // Called with the results from FB.getLoginStatus().
+  if (response.status === 'connected') return fbUserLogin();   // Logged into your webpage and Facebook.
 }
 
 
