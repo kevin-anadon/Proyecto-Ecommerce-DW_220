@@ -75,9 +75,8 @@
                 <span class="text-center my-3 d-block">o</span>
 
                 <div class="Oauths">
-                  <a href="#" class="btn btn-block py-2 btn-facebook">
-                    <span class="icon-facebook mr-3"></span> Iniciar sesión con Facebook
-                  </a>
+                  <div class="fb-login-button" data-width="420" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" onclick="checkLoginState();"></div>
+                  <div class="btn-block py-2 btn-primary" onclick="facebookSignOut();"></div>
                   <div class="btn-block py-2 g-signin2" data-onsuccess="iniciarConGoogle" data-width="420px" data-height="42px" data-theme="dark"></div>
                 </div>
               </form>
@@ -95,6 +94,7 @@
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
   <script src="js/facebook.js"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
