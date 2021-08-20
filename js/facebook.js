@@ -1,5 +1,5 @@
 function statusChangeCallback(response) {                      // Called with the results from FB.getLoginStatus().
-  if (response.status === 'connected') return fbUserLogin();   // Logged into your webpage and Facebook.
+  if (response.status === 'connected'){fbUserLogin();}   // Logged into your webpage and Facebook.
 }
 
 
@@ -29,6 +29,7 @@ function fbUserLogin() {                      // Testing Graph API after login. 
   (response) => {
     iniciarConFacebook(response);
   });
+  location.href = "./index.html";
 }
 
 function facebookSignOut(){
