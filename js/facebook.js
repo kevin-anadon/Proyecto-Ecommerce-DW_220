@@ -1,11 +1,11 @@
 function statusChangeCallback(response) {                      // Called with the results from FB.getLoginStatus().
-  return response.status === 'connected';   // Logged into your webpage and Facebook.
+  if (response.status === 'connected'){fbUserLogin();}   // Logged into your webpage and Facebook.
 }
 
 
 function checkLoginState() {               // Called when a person is finished with the Login Button.
   FB.getLoginStatus( (response) => {       // See the onlogin handler
-    return statusChangeCallback(response);
+    statusChangeCallback(response);
   });
 }
 
@@ -25,15 +25,10 @@ window.fbAsyncInit = () => {
 };
 
 function fbUserLogin() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-  console.log("Logueando");
-  console.log(checkLoginState());
-  if(checkLoginState()){
-    console.log("Connected");
-    FB.api('/me', 'GET',{"fields":"email,first_name,last_name,id,gender"},
-    (response) => {
-      iniciarConFacebook(response);
-    });
-  }
+  FB.api('/me', 'GET',{"fields":"email,first_name,last_name,id,gender"},
+  (response) => {
+    iniciarConFacebook(response);
+  });
 }
 
 function facebookSignOut(){
