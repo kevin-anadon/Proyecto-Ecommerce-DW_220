@@ -41,6 +41,7 @@ function iniciarConGoogle(googleUser) {
 
 function iniciarConFacebook(facebookUser) {
   crearUsuario(facebookUser.email,`${facebookUser.first_name} ${facebookUser.last_name}`);
+  location.href = "./index.html";
 }
 
 function iniciarSesion(){

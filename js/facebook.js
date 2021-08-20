@@ -29,7 +29,6 @@ function fbUserLogin() {                      // Testing Graph API after login. 
   (response) => {
     iniciarConFacebook(response);
   });
-  location.href = "./index.html";
 }
 
 function facebookSignOut(){
