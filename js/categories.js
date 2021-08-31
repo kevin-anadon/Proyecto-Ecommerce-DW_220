@@ -1,10 +1,10 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_PROD_COUNT = "Cant.";
-var currentCategoriesArray = [];
-var currentSortCriteria = undefined;
-var minCount = undefined;
-var maxCount = undefined;
+let currentCategoriesArray = [];
+let currentSortCriteria = undefined;
+let minCount = undefined;
+let maxCount = undefined;
 
 function sortCategories(criteria, array){
     let result = [];
@@ -38,9 +38,7 @@ function sortCategories(criteria, array){
 function showCategoriesList(){
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentCategoriesArray.length; i++){
-        let category = currentCategoriesArray[i];
-
+    for(category of currentCategoriesArray){
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
 

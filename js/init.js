@@ -15,7 +15,7 @@ var hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-var getJSONData = function(url){
+let getJSONData = (url) => {
     var result = {};
     showSpinner();
     return fetch(url)
@@ -26,13 +26,13 @@ var getJSONData = function(url){
         throw Error(response.statusText);
       }
     })
-    .then(function(response) {
+    .then( (response) => {
           result.status = 'ok';
           result.data = response;
           hideSpinner();
           return result;
     })
-    .catch(function(error) {
+    .catch( (error) => {
         result.status = 'error';
         result.data = error;
         hideSpinner();
@@ -44,14 +44,17 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", (e) =>{
-  let recordar = localStorage.getItem('recordar');
-  let user = {};
-  if(recordar === 'true'){
-    user = JSON.parse(localStorage.getItem('user'));
-  }else{
-    user = JSON.parse(sessionStorage.getItem('user'));
-  }
+  let user = traerUsuario();
+  verificarPagina(user);
+  mostrarUsuario(user);
+});
 
+function mostrarUsuario(user){
+  document.getElementById('userProfile').src = user.imgUrl;
+  document.getElementById('userName').innerHTML = user.nombre;
+}
+
+function verificarPagina(user){
   if(user != null){
     if(!user.conectado && location.href.indexOf('login') == -1){
       location.href = './login.html';
@@ -63,4 +66,15 @@ document.addEventListener("DOMContentLoaded", (e) =>{
       location.href = './login.html';
     }
   }
-});
+}
+
+function traerUsuario(){
+  let recordar = localStorage.getItem('recordar');
+  let user = {};
+  if(recordar === 'true'){
+    user = JSON.parse(localStorage.getItem('user'));
+  }else{
+    user = JSON.parse(sessionStorage.getItem('user'));
+  }
+  return user;
+}

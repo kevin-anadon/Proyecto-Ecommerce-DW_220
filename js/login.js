@@ -1,5 +1,4 @@
 $(function() {
-
     $('.btn-link[aria-expanded="true"]').closest('.accordion-item').addClass('active');
   $('.collapse').on('show.bs.collapse', function () {
 	  $(this).closest('.accordion-item').addClass('active');
@@ -20,11 +19,12 @@ function recordarSesion(user,recordar){
   }
 }
 
-function crearUsuario(usuario,contrasenia){
+function crearUsuario(usuario,nombre,imgUrl){
   let user = {}
   user.email = usuario;
-  user.contrasenia = contrasenia;
+  user.nombre = nombre;
   user.conectado = true;
+  user.imgUrl = imgUrl;
   recordarSesion(user,document.getElementById('chkRecordar').checked);
 }
 
@@ -35,12 +35,13 @@ function iniciarConGoogle(googleUser) {
       */
       // Variable que contiene al usuario de google
       let profile = googleUser.getBasicProfile();
-      crearUsuario(profile.getEmail(),profile.getName());
+      crearUsuario(profile.getEmail(),profile.getName(),profile.getImageUrl());
       location.href = "./index.html";
 }
 
 function iniciarConFacebook(facebookUser) {
-  crearUsuario(facebookUser.email,`${facebookUser.first_name} ${facebookUser.last_name}`);
+  let imgUrl = "http://graph.facebook.com/" + facebookUser.id + "/picture?type=normal"
+  crearUsuario(facebookUser.email,`${facebookUser.first_name} ${facebookUser.last_name}`,imgUrl);
   location.href = "./index.html";
 }
 
@@ -52,7 +53,7 @@ function iniciarSesion(){
   }else{
     if(emailValido(usuario)){
       $('#btnIniciar').popover('hide');
-      crearUsuario(usuario,contrasenia);
+      crearUsuario(usuario,'Juan Pérez','/img/profileUser.png'); // Nombre de prueba e imagen por defecto, ya que en un caso real los datos los traigo de una base de datos
       location.href = "./index.html";
     }else{
       $('#btnIniciar').popover('show');

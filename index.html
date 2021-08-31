@@ -2,6 +2,7 @@
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
 <html lang="en">
   <head>
+    <link rel="shortcut icon" sizes="30x30" type="image/x-icon" href="img/icon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Tienda virtual">
@@ -23,7 +24,29 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-        <a class="py-2 d-none d-md-inline-block" href="login.html" onclick="cerrarSesion()">Cerrar sesión</a>
+        <div class="d-none d-md-inline-block dropdown show">
+          <a class="btn btn-secondary" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="">
+              <img id="userProfile" class="img-responsive" src="#" alt="userProfile" style="float:left; object-fit:cover; border-radius: 100%; margin-right: 1rem; flex-shrink:0; max-height:30px; max-width:30px;">
+            </div>
+            <div id="userName" style="color:white; margin-top: 3px; margin-right: 4.1rem; text-overflow: ellipsis; white-space: nowrap; align-self: center;">
+            </div>
+            <div class="arrowProfile" style="position: absolute; right: 3%; bottom: 21%; display: inline-block;">
+              <svg viewBox="0 0 15 10" class="_3_bfp MIpaS yBzR9 _1I3mg fjQuT uQOmx" style="box-sizing: border-box; width: 0.9rem; height: 1.5rem; vertical-align: middle; overflow: hidden;">
+                <use xlink:href="#icon-caret-v2" style="color: white;">
+                  <svg viewBox="0 0 15 10" id="icon-caret-v2">
+                    <path d="M12.78.443L9.756 3.952 8.294 5.65l-.761.884-.033.03-.032-.03-.762-.884-1.463-1.698L2.221.442C1.06-.902-.79 1.126.365 2.468L5.722 8.7c.4.465.795 1.071 1.387 1.249.136.04.266.056.391.051.125.005.255-.01.39-.051.593-.178.988-.784 1.388-1.249l5.357-6.232c1.154-1.342-.696-3.37-1.856-2.024" fill="currentColor" fill-rule="evenodd">
+                    </path>
+                  </svg>
+                </use>
+              </svg>
+            </div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+            <a class="dropdown-item" href="#" onclick="cerrarSesion();">Cerrar sesión</a>
+          </div>
+        </div>
       </div>
     </nav>
     <main role="main">
