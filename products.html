@@ -59,20 +59,20 @@
           <div class="row">
               <div class="col text-right">
                   <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-                      <label class="btn btn-light active" id="sortAscName" onclick="ordenarMostrarProductos(ORDENAR_ASC_POR_NOMBRE);">
+                      <label class="btn btn-light active" id="sortAscName" onclick="mostrarProductos(ORDENAR_ASC_POR_NOMBRE);">
                           <input type="radio" name="options" autocomplete="off" checked>A-Z
                       </label>
-                      <label class="btn btn-light" id="sortDescName" onclick="ordenarMostrarProductos(ORDENAR_DESC_POR_NOMBRE);">
+                      <label class="btn btn-light" id="sortDescName" onclick="mostrarProductos(ORDENAR_DESC_POR_NOMBRE);">
                           <input type="radio" name="options" autocomplete="off">Z-A
                       </label>
-                      <label class="btn btn-light" id="sortAscCost" onclick="ordenarMostrarProductos(ORDENAR_ASC_POR_PRECIO);">
+                      <label class="btn btn-light" id="sortAscCost" onclick="mostrarProductos(ORDENAR_MAYOR_PRECIO);">
                         <input type="radio" name="options" autocomplete="off">Mayor precio
                       </label>
-                      <label class="btn btn-light" id="sortDescCost" onclick="ordenarMostrarProductos(ORDENAR_DESC_POR_PRECIO);">
+                      <label class="btn btn-light" id="sortDescCost" onclick="mostrarProductos(ORDENAR_MENOR_PRECIO);">
                         <input type="radio" name="options" autocomplete="off">Menor precio
                       </label>
-                      <label class="btn btn-light" id="sortByCount" onclick="ordenarMostrarProductos(ORDENAR_POR_CANTIDAD);">
-                          <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Cant.
+                      <label class="btn btn-light" id="sortByCount" onclick="mostrarProductos(ORDENAR_POR_RELEVANCIA);">
+                          <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Relev.
                       </label>
                   </div>
               </div>
