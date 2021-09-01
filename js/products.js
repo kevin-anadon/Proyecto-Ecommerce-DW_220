@@ -72,7 +72,7 @@ function ordenarProductos(criterio){
   let productosOrdenados = [];
   switch(criterio){
     case ORDENAR_ASC_POR_NOMBRE || criterio == undefined:
-      productosOrdenados = productosActuales.sort( (productoA,productoB) => productoA.name < productoB.name ? -1 : productoA.name > productoB.name ? 1 : 0 );
+      productosOrdenados = productosActuales.sort( (productoA,productoB) => productoA.name < productoB.name ? -1 : productoA.name > productoB.name ? 1 : 0 )
       break;
     case ORDENAR_DESC_POR_NOMBRE:
       productosOrdenados = productosActuales.sort( (productoA,productoB) => productoA.name > productoB.name ? -1 : productoA.name < productoB.name ? 1 : 0 );

@@ -9,6 +9,11 @@ $(function() {
 	});
 });
 
+function verificarEnter(e){
+  let tecla = (document.all) ? e.keyCode : e.which;
+  if(tecla == 13) { iniciarSesion(); }
+}
+
 function recordarSesion(user,recordar){
   if(recordar){
     localStorage.setItem('recordar', 'true');
