@@ -32,8 +32,8 @@ function mostrarProductos(criterio,productos){
           </div>
       </a>
       `;
-      document.getElementById("cat-list-container").innerHTML = contenidoHtml;
     }
+    document.getElementById("cat-list-container").innerHTML = contenidoHtml;
 }
 
 function buscar(){
