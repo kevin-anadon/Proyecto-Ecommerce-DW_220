@@ -53,7 +53,7 @@ function iniciarSesion(){
   }else{
     if(emailValido(usuario)){
       $('#btnIniciar').popover('hide');
-      crearUsuario(usuario,'Juan Pérez','/img/profileUser.png'); // Nombre de prueba e imagen por defecto, ya que en un caso real los datos los traigo de una base de datos
+      crearUsuario(usuario,'Juan Pérez','./img/profileUser.png'); // Nombre de prueba e imagen por defecto, ya que en un caso real los datos los traigo de una base de datos
       location.href = "./index.html";
     }else{
       $('#btnIniciar').popover('show');
