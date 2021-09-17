@@ -20,7 +20,7 @@ function mostrarProductos(criterio,productos){
               <div class="col">
                   <div class="d-flex w-100 justify-content-between">
                       <h4 class="mb-1">`+ product.name +`</h4>
-                      <small class="text-muted">` + product.soldCount + ` artículos</small>
+                      <small class="text-muted">` + product.soldCount + ` vendidos</small>
                   </div>
                   <div class="d-flex w-100 justify-content-between">
                       <p class="mb-1">`+ product.description +`</p>
@@ -72,7 +72,7 @@ function ordenarProductos(criterio){
   let productosOrdenados = [];
   switch(criterio){
     case ORDENAR_ASC_POR_NOMBRE || criterio == undefined:
-      productosOrdenados = productosActuales.sort( (productoA,productoB) => productoA.name < productoB.name ? -1 : productoA.name > productoB.name ? 1 : 0 )
+      productosOrdenados = productosActuales.sort( (productoA,productoB) => productoA.name < productoB.name ? -1 : productoA.name > productoB.name ? 1 : 0 );
       break;
     case ORDENAR_DESC_POR_NOMBRE:
       productosOrdenados = productosActuales.sort( (productoA,productoB) => productoA.name > productoB.name ? -1 : productoA.name < productoB.name ? 1 : 0 );

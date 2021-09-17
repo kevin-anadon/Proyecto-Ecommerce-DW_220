@@ -1,32 +1,38 @@
 <!DOCTYPE html>
-<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<html lang="en">
+
+<html lang="es">
+
 <head>
   <link rel="shortcut icon" sizes="30x30" type="image/x-icon" href="img/icon.ico">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+
   <!-- Google Oauth -->
   <meta name="google-signin-client_id" content="248612205064-44cri76i4vjos5r0i3ise0njco0gsg6k.apps.googleusercontent.com">
-
   <title>eMercado - Todo lo que busques está aquí</title>
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/product-info.css" rel="stylesheet">
 </head>
 
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <div class="dropdown show">
+      <a class="py-2 d-none d-md-inline-block" href="index.html"><i class="fas fa-home" style="color: white;"></i> Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html"><i class="fas fa-list-ul" style="color: white;"></i> Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html"><i class="fas fa-cube" style="color: white;"></i> Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html"><i class="fas fa-edit" style="color: white;"></i> Vender</a>
+      <a class="py-2 d-none d-md-inline-block" href="cart.html"><i class="fas fa-shopping-cart" style="color: white;"></i> Mi carrito</a>
+      <div class="d-none d-md-inline-block dropdown show">
         <a class="btn btn-secondary" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="">
             <img id="userProfile" class="img-responsive" src="#" alt="userProfile" style="float:left; object-fit:cover; border-radius: 100%; margin-right: 1rem; flex-shrink:0; max-height:30px; max-width:30px;">
@@ -38,21 +44,80 @@
           </div>
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-          <a class="dropdown-item" href="#" onclick="cerrarSesion();">Cerrar sesión</a>
+          <a class="dropdown-item" href="my-profile.html"><i class="fas fa-user" style="color: grey;"></i> Mi perfil</a>
+          <a class="dropdown-item" href="#" onclick="cerrarSesion();"><i class="fas fa-sign-out-alt" style="color: grey;"></i> Cerrar sesión</a>
         </div>
       </div>
     </div>
-    </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <!-- AQUI SE VISUALIZA EL PRODUCTO -->
+  <div class="bg-light">
+    <div class="container p-5 ">
+        <div id="producto-container" class="row">
+        </div>
     </div>
   </div>
+  <!-- AQUI COMIENZA LA SECCION DE COMENTARIOS -->
+  <div class="container p-5">
+    <p class="h3 d-flex justify-content-center">Comentarios</p>
+    <div id="comentarios-enviar" class="">
+      <div class="container my-3 py-3 text-dark">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-6">
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="d-flex flex-start w-100">
+                  <img id="img-profile-comment"
+                    class="rounded-circle shadow-1-strong me-3"
+                    alt="avatar"
+                    width="60"
+                    height="60"
+                  >
+                  <div class="w-100">
+                    <div class="comment-box ml-2">
+                      <h4>Añade un comentario</h4>
+                    </div>
+                    <div class="p-2">
+                      <ul onclick="estrellas(event);" class="rating">
+                        <li class="fa fa-star checked" data-rate=1></li>
+                        <li class="far fa-star checked" data-rate=2></li>
+                        <li class="far fa-star" data-rate=3></li>
+                        <li class="far fa-star" data-rate=4></li>
+                        <li class="far fa-star" data-rate=5></li>
+                      </ul>
+                    </div>
+                    <div class="form-outline">
+                      <textarea class="form-control" id="textArea-comentario" rows="4" placeholder="Coméntanos tu opinión."></textarea>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                      <button type="button" class="btn btn-primary" onclick="subirComentario();">Enviar <i class="far fa-paper-plane"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-2">
+    <div class="container my-5 text-dark">
+      <div class="row d-flex justify-content-center">
+        <div id="comentarios-body" class="col-md-11 col-lg-9 col-xl-7">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- AQUI SE PRESENTAN LOS PRODUCTOS RELACIONADOS -->
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <p class="h3 pb-3 ">Productos relacionados</p>
+        <div id="productos-relacionados" class="row">
+        </div>
+      </div>
+    </div>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
@@ -77,6 +142,9 @@
   <script src="js/signout.js"></script>
   <script src="js/google.js"></script>
   <script src="js/facebook.js"></script>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="js/luxon.js" ></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>

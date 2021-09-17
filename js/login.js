@@ -52,18 +52,26 @@ function iniciarConFacebook(facebookUser) {
 
 function iniciarSesion(){
   let usuario = document.getElementById('usuario').value;
-  let contrasenia = document.getElementById('contrasenia').value;
-  if(verificarCampos(usuario, contrasenia)){
+  let contrasenia = document.getElementById('contrasenia');
+  if(verificarCampos(usuario, contrasenia.value)){
     $('#alertaError').modal('show');
   }else{
     if(emailValido(usuario)){
       $('#btnIniciar').popover('hide');
+      hash = encriptar(contrasenia.value); // En un caso real lo guaradaría en la base de datos y luego en el login compararía con bycrptSync.compare
       crearUsuario(usuario,'Juan Pérez','./img/profileUser.png'); // Nombre de prueba e imagen por defecto, ya que en un caso real los datos los traigo de una base de datos
       location.href = "./index.html";
     }else{
       $('#btnIniciar').popover('show');
     }
   }
+}
+
+function encriptar(texto){
+  let bycrypt = dcodeIO.bcrypt;
+  let salt = bycrypt.genSaltSync(10);
+  let hash = bycrypt.hashSync(texto,salt);
+  return hash;
 }
 
 function emailValido(email){
