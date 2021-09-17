@@ -45,8 +45,7 @@ function iniciarConGoogle(googleUser) {
 }
 
 function iniciarConFacebook(facebookUser) {
-  let imgUrl = "http://graph.facebook.com/" + facebookUser.id + "/picture?type=normal"
-  crearUsuario(facebookUser.email,`${facebookUser.first_name} ${facebookUser.last_name}`,imgUrl);
+  crearUsuario(facebookUser.email,`${facebookUser.first_name} ${facebookUser.last_name} ${facebookUser.picture.data.url}`);
   location.href = "./index.html";
 }
 
