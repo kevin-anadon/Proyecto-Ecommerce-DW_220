@@ -133,7 +133,7 @@ function mostrarComentarios(comentarios){
   let contenidoHtml = '';
   ordenarComentarios(ORDERNAR_DESC_POR_FECHA,comentarios);
   let usuario = traerUsuario();
-  let imgUrl = '/img/profileUser.png'
+  let imgUrl = './img/profileUser.png'
   if(usuario.email == comentarios[0].user){ // TRAIGO INFORMACIÓN DEL USUARIO QUE ENVIO EL COMENTARIO
     imgUrl = usuario.imgUrl;
     comentarios[0].user = usuario.nombre;
