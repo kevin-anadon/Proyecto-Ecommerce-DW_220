@@ -25,10 +25,12 @@ window.fbAsyncInit = () => {
 };
 
 function fbUserLogin() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+  if(!traerUsuario().conectado){
   FB.api('/me', 'GET',{"fields":"email,first_name,last_name,id,gender"},
   (response) => {
     iniciarConFacebook(response);
   });
+  }
 }
 
 function facebookSignOut(){
