@@ -61,7 +61,7 @@ function mostrarProducto(){
 function mostrarRelacionados(productos){
   let productosRelacionados = filtarProductosRelacionados(productos);
   let contenidoHtml = ``;
-  for (let producto of productosRelacionados){
+  for (producto of productosRelacionados){
     contenidoHtml += `<div class="col-md-4">
       <a class="text-dark" style="text-decoration: none;" href="./product-info.html">
       <div class="card card-rel mb-4 box-shadow">
@@ -81,13 +81,8 @@ function mostrarRelacionados(productos){
 
 function filtarProductosRelacionados(productos){
   let productosRelacionados = [];
-  for (let i = 0; i < productos.length; i++) {
-    let producto = productos[i];
-    for(prodRel of productoActual.relatedProducts){
-      if(i == prodRel){
-        productosRelacionados.push(producto);
-      }
-    }
+  for(prodRel of productoActual.relatedProducts){
+    productosRelacionados.push(productos[prodRel]);
   }
   return productosRelacionados;
 }
