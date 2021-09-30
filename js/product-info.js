@@ -22,7 +22,7 @@ function crearCarousel(){
       <div class="carousel-item ${active}">
         <img class="d-block w-100" src="${img}" alt="${i} slide">
       </div>`;
-    i+=1;
+    ++i;
   }
 
   carousel += `
@@ -59,7 +59,7 @@ function mostrarProducto(){
 }
 
 function mostrarRelacionados(productos){
-  let productosRelacionados = filtarProductosRelacionados(productos);
+  const productosRelacionados = filtarProductosRelacionados(productos);
   let contenidoHtml = ``;
   for (producto of productosRelacionados){
     contenidoHtml += `<div class="col-md-4">
@@ -97,12 +97,9 @@ function traerProductos(){
 
 function ponerEstrellas(score){
   let estrellas = '';
-  for(let i = 1; i <=5; i++){
-    if(score >= i){
-      estrellas += '<i class="fas fa-star fa-sm text-warning"></i>'
-    }else if(score < i) {
-      estrellas += '<i class="far fa-star fa-sm text-warning"></i>'
-    }
+  for(let i = 1; i <=5; i++){                         // Si la puntuación es mayor que i por ej. 1, entonces será una estrella solida(pintada)
+    let solidOrRegular = score >= i ? 'fas' : 'far';  // de lo contrario es una regular(no pintada)
+    estrellas += `<i class="${solidOrRegular} fa-star fa-sm text-warning"></i>`;
   }
   return estrellas;
 }
@@ -124,10 +121,9 @@ function ordenarComentarios(criterio,comentarios){
 }
 
 function mostrarComentarios(comentarios){
-  let comentarios_body = document.getElementById('comentarios-body');
+  const comentarios_body = document.getElementById('comentarios-body');
+  const usuario = traerUsuario();
   let contenidoHtml = '';
-  ordenarComentarios(ORDERNAR_DESC_POR_FECHA,comentarios);
-  let usuario = traerUsuario();
   let imgUrl = './img/profileUser.png'
   if(usuario.email == comentarios[0].user){ // TRAIGO INFORMACIÓN DEL USUARIO QUE ENVIO EL COMENTARIO
     imgUrl = usuario.imgUrl;
@@ -180,7 +176,7 @@ function estrellas(e){ //SETEO LAS ESTRELLAS DE SOLID A REGULAR O BICEVERSA DEPE
 }
 
 function subirComentario(){
-  let comentarios = []
+  let comentarios = [];
   let comentario = {};
   let mensaje = document.getElementById('textArea-comentario');
   let puntuación = puntuacionActual;
@@ -210,14 +206,13 @@ function subirComentario(){
 }
 
 function traerFechaActual(){
-  let fecha = luxon.DateTime.now().toFormat("yyyy'-'MM'-'dd HH':'mm':'ss'");
-  return fecha;
+  return luxon.DateTime.now().toFormat("yyyy'-'MM'-'dd HH':'mm':'ss'");
 }
 
 function traerComentarios(){
   getJSONData(PRODUCT_INFO_COMMENTS_URL).then( (resultObj) => {
     if(resultObj.status === "ok"){
-      mostrarComentarios(resultObj.data);
+      mostrarComentarios(ordenarComentarios(ORDERNAR_DESC_POR_FECHA,resultObj.data)); // Envio los comentarios ordenados
     }
   });
 }
