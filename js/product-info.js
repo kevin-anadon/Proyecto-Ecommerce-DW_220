@@ -105,8 +105,9 @@ function ponerEstrellas(score){
 }
 
 function stringToDate(stringDate){
-  let dateFormatted = luxon.DateTime.fromSQL(stringDate);
-  return dateFormatted;
+  let date = new Date(stringDate);
+  let dateForm = moment(date).format('YYYY-MM-DD HH:mm:ss');
+  return dateForm;
 }
 
 // ORDENO LOS COMENTARIOS DEL MÁS RECIENTE AL MÁS ANTIGUO
@@ -120,6 +121,10 @@ function ordenarComentarios(criterio,comentarios){
   return comentariosOrdenados;
 }
 
+function mayusPrimeraLetra(palabra){
+  return palabra.substring(0,1).toUpperCase() + palabra.substr(1,palabra.length);
+}
+
 function mostrarComentarios(comentarios){
   const comentarios_body = document.getElementById('comentarios-body');
   const usuario = traerUsuario();
@@ -130,6 +135,7 @@ function mostrarComentarios(comentarios){
     comentarios[0].user = usuario.nombre;
   }
   for(let comentario of comentarios) {
+    let dateAgo = mayusPrimeraLetra(moment(comentario.dateTime).locale('es').fromNow());
     contenidoHtml += `<div class="d-flex flex-start mb-4">
           <img
             class="rounded-circle shadow-1-strong me-3"
@@ -142,7 +148,7 @@ function mostrarComentarios(comentarios){
             <div class="card-body p-4">
               <div class="">
                 <h5>${comentario.user}</h5>
-                <p class="small">${comentario.dateTime}</p>
+                <p class="small">${dateAgo}</p>
                 <p>${comentario.description}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">${ponerEstrellas(comentario.score)}
@@ -206,7 +212,7 @@ function subirComentario(){
 }
 
 function traerFechaActual(){
-  return luxon.DateTime.now().toFormat("yyyy'-'MM'-'dd HH':'mm':'ss'");
+  return moment().format('YYYY-MM-DD HH:mm:ss');
 }
 
 function traerComentarios(){
