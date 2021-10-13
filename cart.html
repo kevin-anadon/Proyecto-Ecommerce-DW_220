@@ -90,20 +90,44 @@
       </div>
       <div class="d-block my-4 pt-4">
         <h3>Envío</h3>
-        <div class="custom-control custom-radio">
-          <input id="goldradio" value="0.13" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
-          <label class="custom-control-label" for="goldradio">Premium (13%)</label>
+        <form class="py-2">
+          <div class="form-group">
+            <label for="calle">Calle</label>
+            <input id="calle" type="text" class="form-control w-50 envioForms" aria-describedby="calle">
+          </div>
+          <div class="form-group">
+            <label for="nPuerta">Número de puerta</label>
+            <input id="nPuerta" type="number" class="form-control w-25 envioForms" aria-describedby="nPuerta">
+          </div>
+          <div class="form-group">
+            <label for="esquina">Esquina</label>
+            <input id="esquina" type="text" class="form-control w-50 envioForms" aria-describedby="esquina">
+          </div>
+          <div class="form-group">
+            <label for="pais">País</label>
+            <select id="pais" class="form-control w-25">
+            </select>
+          </div>
+        </form>
+        <div class="pt-2">
+          <div class="custom-control custom-radio">
+            <input id="goldradio" value="0.13" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+            <label class="custom-control-label" for="goldradio">Premium (13%)</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="premiumradio" value="0.07" name="publicationType" type="radio" class="custom-control-input" required="">
+            <label class="custom-control-label" for="premiumradio">Express (7%)</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="standardradio" value="0.05" name="publicationType" type="radio" class="custom-control-input" required="">
+            <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
+          </div>
         </div>
-        <div class="custom-control custom-radio">
-          <input id="premiumradio" value="0.07" name="publicationType" type="radio" class="custom-control-input" required="">
-          <label class="custom-control-label" for="premiumradio">Express (7%)</label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input id="standardradio" value="0.05" name="publicationType" type="radio" class="custom-control-input" required="">
-          <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
+        <div class="pt-4">
+          <button id="btnMetodoPago" class="btn btn-outline-secondary" onclick="//metodoPago()">Elegir método de pago</button>
         </div>
     </div>
-    <h3 class="pt-4 py-2">Costos</h3>
+    <h3 class="pt-4">Costos</h3>
     <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
@@ -125,7 +149,7 @@
         </li>
       </ul>
     <hr class="mb-4">
-    <button class="btn btn-primary btn-lg" type="submit">Comprar</button>
+    <button class="btn btn-primary btn-lg" onclick="comprar()">Comprar</button>
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
@@ -143,6 +167,7 @@
   <script src="js/signout.js"></script>
   <script src="js/google.js"></script>
   <script src="js/facebook.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>

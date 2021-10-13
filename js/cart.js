@@ -134,7 +134,7 @@ function mostrarProductos(){
     contenidoHtml += `<tr>
     <td class="align-middle"><img height="80" src="${src}"></td>
     <td class="align-middle">${name}</td>
-    <td class="align-middle"><input class="form-control text-center" type="number" min="1" style="width: 20%" data-cant=${count} data-costo=${unitCost} value=${count} onChange="cambiarCantidadProducto(event)"></td>
+    <td class="align-middle"><input class="form-control text-center" type="number" min="1" style="width: 25%" data-cant=${count} data-costo=${unitCost} value=${count} onChange="cambiarCantidadProducto(event)"></td>
     <td class="align-middle">${unitCost} ${currency}</td>
     <td class="align-middle"><i class="far fa-trash-alt fa-2x" onmouseleave="iconoNegro(event)" onmouseover="iconoRojo(event)" onclick="eliminarProducto(event)"></i></td>
     </tr>`;
@@ -154,6 +154,38 @@ function traerCarrito(){
   });
 }
 
+function comprar(){
+  for (elemento of document.getElementsByClassName('envioForms')){ // Por cada elemento del apartado de envío reviso que no estén vacios
+    if(elemento.value.trim() == ''){
+      //Alerta con SweetAlert
+      return Swal.fire({
+        title: 'Debe completar los campos de envío',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+    }
+  }
+}
+
+function mostrarPaises(paises){
+  let contenidoHtml = ``;
+  for ({name} of paises) {
+    let selected = name == 'Uruguay' ? 'selected' : '';
+    contenidoHtml += `<option ${selected} value="${name}">${name}</option>`;
+  }
+  document.getElementById('pais').innerHTML = contenidoHtml;
+}
+
+function traerPaises(){
+  getJSONData(PAISES_URL)
+  .then( (resultObj) => {
+    if(resultObj.status === 'ok'){
+      mostrarPaises(resultObj.data);
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", (e) => {
   traerCarrito();
+  traerPaises();
 });
