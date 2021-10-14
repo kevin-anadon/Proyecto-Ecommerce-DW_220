@@ -74,6 +74,7 @@
               <th scope="col">Nombre</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Precio</th>
+              <th scope="col">Costo Unitario</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -123,16 +124,16 @@
             <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
           </div>
         </div>
-        <div class="pt-4">
+        <div class="pt-5">
           <button id="btnMetodoPago" class="btn btn-outline-secondary" onclick="//metodoPago()">Elegir método de pago</button>
         </div>
     </div>
-    <h3 class="pt-4">Costos</h3>
+    <h3 class="pt-2">Costos</h3>
     <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0">Subtotal</h6>
-            <small class="text-muted">Unitario del producto</small>
+            <small class="text-muted">Unitario de los productos</small>
           </div>
           <span class="text-muted" id="productCostText">-</span>
         </li>

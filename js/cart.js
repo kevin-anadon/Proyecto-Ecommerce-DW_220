@@ -4,6 +4,7 @@ let total = 0;
 let porcentajeEnvioActual = 0;
 let divisaActual = 'UYU'
 let carrito = {};
+
 const radioButtons = document.getElementsByClassName('custom-control-input');
 
 for (rBtn of radioButtons) { //Añado para cada radio button un addEventListener
@@ -18,14 +19,15 @@ for (rBtn of radioButtons) { //Añado para cada radio button un addEventListener
 
 function cambiarCantidadProducto(e){
   let inputCantidad = e.target;
-  let precioUnitario = inputCantidad.dataset.costo;
-  let cantidadActual = inputCantidad.value;
-  let cantidadAnterior = inputCantidad.dataset.cant;
+  const celdaCostoUnitario = e.target.parentNode.parentNode.cells[4];
+  const precioUnitario = inputCantidad.dataset.costo;
+  const cantidadActual = inputCantidad.value;
+  const cantidadAnterior = inputCantidad.dataset.cant;
 
-  let costoUnitarioCantidadAnterior = precioUnitario * cantidadAnterior;
-  let costoUnitarioCantidad = precioUnitario * cantidadActual;
+  const costoUnitarioCantidadAnterior = precioUnitario * cantidadAnterior;
+  const costoUnitarioCantidad = precioUnitario * cantidadActual;
   inputCantidad.dataset.cant = cantidadActual;
-  console.log(inputCantidad.dataset.cant);
+  celdaCostoUnitario.innerHTML = `${numberToLocaleString(costoUnitarioCantidad)}`;
 
   subTotal += (costoUnitarioCantidad - costoUnitarioCantidadAnterior);
   envio = (porcentajeEnvioActual * subTotal);
@@ -33,22 +35,29 @@ function cambiarCantidadProducto(e){
   mostrarCosto();
 }
 
-function numeroConPuntoYDivisa(numero){
-  return numero.toLocaleString('es-UY', {style: 'currency', currency: divisaActual, maximumFractionDigits: 0});
+function numberToLocaleString(numero){
+  return numero.toLocaleString('es-UY', {style: 'currency', currency: divisaActual, maximumFractionDigits: 1});
+}
+
+function localeStringToNumber(numero){
+  return parseFloat(numero.split('$')[1]);
 }
 
 function mostrarCosto(){
-  document.getElementById('productCostText').innerHTML = subTotal==0 ? '-' :  numeroConPuntoYDivisa(subTotal);
-  document.getElementById('envioText').innerHTML = envio==0 ? '-' : numeroConPuntoYDivisa(envio);
-  document.getElementById('totalCostText').innerHTML = total==0 ? '-' : numeroConPuntoYDivisa(total);
+  document.getElementById('productCostText').innerHTML = subTotal==0 ? '-' :  numberToLocaleString(subTotal);
+  document.getElementById('envioText').innerHTML = envio==0 ? '-' : numberToLocaleString(envio);
+  document.getElementById('totalCostText').innerHTML = total==0 ? '-' : numberToLocaleString(total);
   document.getElementById('spanTotal').innerHTML = `Total (${divisaActual})`;
 }
 
 function cargarCostos(){
   let trArray = document.getElementById('productos').childNodes;
   for (tr of trArray) {
-    let inputCantidad = tr.cells[2].childNodes[0];
-    let costoUnitarioCantidad = inputCantidad.dataset.costo * inputCantidad.value;
+    const inputCantidad = tr.cells[2].childNodes[0];
+    const cantidad = inputCantidad.value;
+    const precio = inputCantidad.dataset.costo;
+    const costoUnitarioCantidad = cantidad * precio;
+    tr.cells[4].innerHTML = `${numberToLocaleString(costoUnitarioCantidad)}`;
     subTotal += costoUnitarioCantidad;
   }
   for (rBtn of radioButtons) {
@@ -89,16 +98,16 @@ function transformarMoneda(unitCost, currency){
 }
 
 function actualizarCotizacion(event){
+  const filas = document.getElementById('productos').childNodes;
+  const currencyAnterior = divisaActual;
   divisaActual = event.target.value;
-  let filas = document.getElementById('productos').childNodes;
   for (fila of filas) {
     let celdaPrecio = fila.cells[3];
     let celdaInput = fila.cells[2].childNodes[0];
-    let palabraSeparada = celdaPrecio.innerHTML.split(' ',2);
-    let unitCostAnterior = parseFloat(palabraSeparada[0]);
-    let currencyAnterior = palabraSeparada[1];
+    const unitCostAnterior = parseFloat(celdaInput.dataset.costo);
+
     ({unitCost, currency} = transformarMoneda(unitCostAnterior, currencyAnterior));
-    celdaPrecio.innerHTML = `${unitCost} ${currency}`;
+    celdaPrecio.innerHTML = `${numberToLocaleString(unitCost)}`;
     celdaInput.dataset.costo = unitCost;
     subTotal = 0;
     cargarCostos();
@@ -131,11 +140,14 @@ function mostrarProductos(){
   let contenidoHtml = ``;
   for ({name, count, unitCost, currency, src} of carrito.articles) {
     ({unitCost, currency} = transformarMoneda(unitCost, currency)); //Cotizo el costo unitario y la moneda
+    const precioUnitario = numberToLocaleString(unitCost);
+    const unitarioPorCantidad = numberToLocaleString(unitCost*count);
     contenidoHtml += `<tr>
     <td class="align-middle"><img height="80" src="${src}"></td>
     <td class="align-middle">${name}</td>
     <td class="align-middle"><input class="form-control text-center" type="number" min="1" style="width: 25%" data-cant=${count} data-costo=${unitCost} value=${count} onChange="cambiarCantidadProducto(event)"></td>
-    <td class="align-middle">${unitCost} ${currency}</td>
+    <td class="align-middle">${precioUnitario}</td>
+    <td class="align-middle">${unitarioPorCantidad}</td>
     <td class="align-middle"><i class="far fa-trash-alt fa-2x" onmouseleave="iconoNegro(event)" onmouseover="iconoRojo(event)" onclick="eliminarProducto(event)"></i></td>
     </tr>`;
   }
