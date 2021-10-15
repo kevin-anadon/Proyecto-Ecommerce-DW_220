@@ -203,7 +203,7 @@ function obtenerDireccion(event){
   let leafletMap = document.getElementById('leafletMap');
   let formEnviar = document.getElementById('form-envio');
   if(event.target.checked){
-    leafletMap.style.height = '50vh';
+    leafletMap.style.height = '34vh';
     const coordenadas = navigator.geolocation.getCurrentPosition(({coords}) => {
       cargarMapa([coords.latitude,coords.longitude]);
     });
