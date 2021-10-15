@@ -17,8 +17,9 @@
   crossorigin=""/>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <style>
-    #leafletMap {
-      height: 50vh;
+    .transparente {
+      background-color: rgba(245, 245, 245, 1);
+      opacity: .4;
     }
 
     .bd-placeholder-img {
@@ -98,7 +99,7 @@
       <div class="row pt-5">
         <div class="col">
             <h3>Envío</h3>
-            <form class="pl-2">
+            <form id="form-envio" class="pl-2">
               <div class="form-group">
                 <label for="calle">Calle</label>
                 <input id="calle" type="text" class="form-control w-50 envioForms" aria-describedby="calle">
@@ -121,24 +122,24 @@
         <div class="col">
           <!-- Default unchecked -->
           <div class="custom-control custom-checkbox pb-3">
-              <input id="chkMapa" type="checkbox" class="custom-control-input" onclick="obtenerDireccion()">
-              <label class="custom-control-label" for="chkMapa">Usar mi dirección</label>
+              <input id="chkMapa" type="checkbox" class="custom-control-input" onclick="obtenerDireccion(event)">
+              <label class="custom-control-label" for="chkMapa">Autodetectar mi dirección</label>
           </div>
           <div id="leafletMap">
           </div>
         </div>
       </div>
-        <div class="pl-2">
+        <div class="pl-2 pt-3">
           <div class="custom-control custom-radio">
-            <input id="goldradio" value="0.13" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+            <input id="goldradio" value="0.13" name="publicationType" type="radio" class="rbtns custom-control-input" checked="" required="">
             <label class="custom-control-label" for="goldradio">Premium (13%)</label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="premiumradio" value="0.07" name="publicationType" type="radio" class="custom-control-input" required="">
+            <input id="premiumradio" value="0.07" name="publicationType" type="radio" class="rbtns custom-control-input" required="">
             <label class="custom-control-label" for="premiumradio">Express (7%)</label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="standardradio" value="0.05" name="publicationType" type="radio" class="custom-control-input" required="">
+            <input id="standardradio" value="0.05" name="publicationType" type="radio" class="rbtns custom-control-input" required="">
             <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
           </div>
         </div>

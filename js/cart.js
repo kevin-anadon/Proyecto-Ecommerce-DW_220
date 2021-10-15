@@ -4,11 +4,10 @@ let total = 0;
 let porcentajeEnvioActual = 0;
 let divisaActual = 'UYU'
 let carrito = {};
-const coordenadasLatu = [-34.878992,-56.076797];
 let mapa = null;
 let marker = null;
 
-const radioButtons = document.getElementsByClassName('custom-control-input');
+const radioButtons = document.getElementsByClassName('rbtns');
 
 for (rBtn of radioButtons) { //Añado para cada radio button un addEventListener
   rBtn.addEventListener('change', (event) => {
@@ -171,7 +170,7 @@ function traerCarrito(){
 
 function comprar(){
   for (elemento of document.getElementsByClassName('envioForms')){ // Por cada elemento del apartado de envío reviso que no estén vacios
-    if(elemento.value.trim() == ''){
+    if(elemento.value.trim() == '' && !document.getElementById('chkMapa').checked){
       //Alerta con SweetAlert
       return Swal.fire({
         title: 'Debe completar los campos de envío',
@@ -200,10 +199,19 @@ function traerPaises(){
   });
 }
 
-function obtenerDireccion(){
-  const coordenadas = navigator.geolocation.getCurrentPosition(({coords}) => {
-    cargarMapa([coords.latitude,coords.longitude]);
-  });
+function obtenerDireccion(event){
+  let leafletMap = document.getElementById('leafletMap');
+  let formEnviar = document.getElementById('form-envio');
+  if(event.target.checked){
+    leafletMap.style.height = '50vh';
+    const coordenadas = navigator.geolocation.getCurrentPosition(({coords}) => {
+      cargarMapa([coords.latitude,coords.longitude]);
+    });
+    formEnviar.className = 'transparente';
+  }else{
+    leafletMap.style.height = '0px';
+    formEnviar.classList.remove('transparente');
+  }
 }
 
 function cargarMapa(coordenadas){
@@ -220,6 +228,7 @@ function cargarMapa(coordenadas){
     }).addTo(mapa);
     marker = L.marker(coordenadas).addTo(mapa);
     mapa.on('click',clickMap);
+    mapa.setView(false);
   }else{
     mapa.setView(coordenadas,16);
     marker.removeFrom(mapa);
@@ -236,5 +245,4 @@ function clickMap(event){
 document.addEventListener("DOMContentLoaded", (e) => {
   traerCarrito();
   traerPaises();
-  cargarMapa(coordenadasLatu);
 });
