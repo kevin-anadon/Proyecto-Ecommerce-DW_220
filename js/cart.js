@@ -4,6 +4,9 @@ let total = 0;
 let porcentajeEnvioActual = 0;
 let divisaActual = 'UYU'
 let carrito = {};
+const coordenadasLatu = [-34.878992,-56.076797];
+let mapa = null;
+let marker = null;
 
 const radioButtons = document.getElementsByClassName('custom-control-input');
 
@@ -197,7 +200,41 @@ function traerPaises(){
   });
 }
 
+function obtenerDireccion(){
+  const coordenadas = navigator.geolocation.getCurrentPosition(({coords}) => {
+    cargarMapa([coords.latitude,coords.longitude]);
+  });
+}
+
+function cargarMapa(coordenadas){
+  if(mapa == null){
+    mapa = L.map('leafletMap').setView(coordenadas,16);
+    // Configuraciones
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessTokenMapBox}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessTokenMapBox: accessTokenMapBox
+    }).addTo(mapa);
+    marker = L.marker(coordenadas).addTo(mapa);
+    mapa.on('click',clickMap);
+  }else{
+    mapa.setView(coordenadas,16);
+    marker.removeFrom(mapa);
+    marker = L.marker(coordenadas).addTo(mapa);
+  }
+}
+
+function clickMap(event){
+  mapa.setView(event.latlng,16);
+  marker.removeFrom(mapa);
+  marker = L.marker(event.latlng).addTo(mapa);
+}
+
 document.addEventListener("DOMContentLoaded", (e) => {
   traerCarrito();
   traerPaises();
+  cargarMapa(coordenadasLatu);
 });

@@ -5,16 +5,22 @@
   <link rel="shortcut icon" sizes="30x30" type="image/x-icon" href="img/icon.ico">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+  <meta name="description" content="carrito e-commerce">
   <!-- Google Oauth -->
   <meta name="google-signin-client_id" content="248612205064-44cri76i4vjos5r0i3ise0njco0gsg6k.apps.googleusercontent.com">
 
   <title>eMercado - Todo lo que busques está aquí</title>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-
   <style>
+    #leafletMap {
+      height: 50vh;
+    }
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -89,28 +95,40 @@
           <option onclick="" value="USD">USD</option>
         </select>
       </div>
-      <div class="d-block my-4 pt-4">
-        <h3>Envío</h3>
-        <form class="py-2">
-          <div class="form-group">
-            <label for="calle">Calle</label>
-            <input id="calle" type="text" class="form-control w-50 envioForms" aria-describedby="calle">
+      <div class="row pt-5">
+        <div class="col">
+            <h3>Envío</h3>
+            <form class="pl-2">
+              <div class="form-group">
+                <label for="calle">Calle</label>
+                <input id="calle" type="text" class="form-control w-50 envioForms" aria-describedby="calle">
+              </div>
+              <div class="form-group">
+                <label for="nPuerta">Número de puerta</label>
+                <input id="nPuerta" type="number" class="form-control w-25 envioForms" aria-describedby="nPuerta">
+              </div>
+              <div class="form-group">
+                <label for="esquina">Esquina</label>
+                <input id="esquina" type="text" class="form-control w-50 envioForms" aria-describedby="esquina">
+              </div>
+              <div class="form-group">
+                <label for="pais">País</label>
+                <select id="pais" class="form-control w-25">
+                </select>
+              </div>
+            </form>
+        </div>
+        <div class="col">
+          <!-- Default unchecked -->
+          <div class="custom-control custom-checkbox pb-3">
+              <input id="chkMapa" type="checkbox" class="custom-control-input" onclick="obtenerDireccion()">
+              <label class="custom-control-label" for="chkMapa">Usar mi dirección</label>
           </div>
-          <div class="form-group">
-            <label for="nPuerta">Número de puerta</label>
-            <input id="nPuerta" type="number" class="form-control w-25 envioForms" aria-describedby="nPuerta">
+          <div id="leafletMap">
           </div>
-          <div class="form-group">
-            <label for="esquina">Esquina</label>
-            <input id="esquina" type="text" class="form-control w-50 envioForms" aria-describedby="esquina">
-          </div>
-          <div class="form-group">
-            <label for="pais">País</label>
-            <select id="pais" class="form-control w-25">
-            </select>
-          </div>
-        </form>
-        <div class="pt-2">
+        </div>
+      </div>
+        <div class="pl-2">
           <div class="custom-control custom-radio">
             <input id="goldradio" value="0.13" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
             <label class="custom-control-label" for="goldradio">Premium (13%)</label>
@@ -124,11 +142,11 @@
             <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
           </div>
         </div>
-        <div class="pt-5">
-          <button id="btnMetodoPago" class="btn btn-outline-secondary" onclick="//metodoPago()">Elegir método de pago</button>
-        </div>
     </div>
-    <h3 class="pt-2">Costos</h3>
+    <div class="pt-5">
+      <button id="btnMetodoPago" class="btn btn-outline-secondary" onclick="//metodoPago()">Elegir método de pago</button>
+    </div>
+    <h3 class="pt-4">Costos</h3>
     <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
@@ -169,6 +187,9 @@
   <script src="js/google.js"></script>
   <script src="js/facebook.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>

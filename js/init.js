@@ -8,6 +8,7 @@ const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_URL = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 const PAISES_URL = "./resources/paises.json";
+const accessTokenMapBox = 'sk.eyJ1Ijoia2V2aW4tYW5hZG9uIiwiYSI6ImNrdXJtOGZ4MzNvZmwydXJ1amNnNG91azYifQ.GC6LK8lqJhg3vmDygZ6ANA';
 
 const showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
