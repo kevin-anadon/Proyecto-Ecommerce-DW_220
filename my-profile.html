@@ -6,12 +6,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+  <meta name="description" content="Mi perfil e-commerce">
   <!-- Google Oauth -->
   <meta name="google-signin-client_id" content="248612205064-44cri76i4vjos5r0i3ise0njco0gsg6k.apps.googleusercontent.com">
 
   <title>eMercado - Todo lo que busques está aquí</title>
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
@@ -62,12 +62,50 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container pt-3">
+    <h2>Mi perfil</h2>
+    <div class="pt-2">
+      <div class="row justify-content-center">
+        <div class="col-8 mr-5">
+          <img id="imgPerfilUser" class="img-responsive border rounded-circle" src="img/profileUser.png" alt="imgPerfilUser" style="object-fit:cover; max-height:140px; max-width:120px; margin-left: auto; margin-right: auto;">
+          <button class="btn btn-primary shadow" style="border-radius: 50%; position:absolute; left: 12%; top: 60%; backg" class="btn"><i class="fas fa-pencil-alt" style="color: white;"></i></button>
+        </div>
+      </div>
+      <form>
+        <div class="form-row pt-3">
+          <div class="form-group col-md-2">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="form-control" placeholder="Nombre">
+          </div>
+          <div class="form-group col-sm-1"> <!-- Espacio invisible -->
+          </div>
+          <div class="form-group col-md-2">
+            <label for="apellido">Apellido</label>
+            <input id="apellido" type="text" class="form-control" placeholder="Apellido">
+          </div>
+        </div>
+        <div class="form-row pt-3">
+          <div class="form-group col-md-5">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-row pt-3">
+          <div class="form-group col-md-5">
+            <label for="telefono">Teléfono de contacto</label>
+            <input id="telefono" type="text" class="form-control" placeholder="Teléfono">
+          </div>
+        </div>
+        <div class="form-row pt-3">
+          <div class="form-group col-md-2">
+            <label for="edad">Edad</label>
+            <input id="edad" type="number" min="1" class="form-control" placeholder="Edad">
+          </div>
+        </div>
+        <div class="pt-3 pb-3">
+          <button id="btnGuardarInfo" class="btn btn-primary" type="button">Guardar</button>
+        </div>
+      </form>
     </div>
   </div>
   <footer class="text-muted bg-light">
@@ -76,20 +114,6 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-  <div class="alert fade alert-success" role="alert" id="alertResult">
-    <span id="resultSpan"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
@@ -98,6 +122,8 @@
   <script src="js/signout.js"></script>
   <script src="js/google.js"></script>
   <script src="js/facebook.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+  <script src="js/cleave-phone.uy.js"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>

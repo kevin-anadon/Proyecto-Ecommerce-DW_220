@@ -43,15 +43,6 @@ const getJSONData = (url) => {
     });
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", (e) =>{
-  let user = traerUsuario();
-  verificarPagina(user);
-  mostrarUsuario(user);
-});
-
 function mostrarUsuario(user){
   document.getElementById('userProfile').src = user.imgUrl;
   document.getElementById('userName').innerHTML = user.nombre;
@@ -81,3 +72,19 @@ function traerUsuario(){
   }
   return user;
 }
+
+function emailValido(email){
+  // Expresion regular que evalua que las tres partes que componen a una direccion de correo sean válidas
+  const expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  // Devuelvo true si es válido
+  return expReg.test(email);
+}
+
+//Función que se ejecuta una vez que se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
+document.addEventListener("DOMContentLoaded", (e) =>{
+  let user = traerUsuario();
+  verificarPagina(user);
+  mostrarUsuario(user);
+});
