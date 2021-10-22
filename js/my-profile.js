@@ -1,4 +1,5 @@
 const btnGuardar = document.getElementById('btnGuardarInfo');
+const btnEditar = document.getElementById('btnEditarImg');
 const nombre = document.getElementById('nombre');
 const apellido = document.getElementById('apellido');
 const email = document.getElementById('email');
@@ -7,23 +8,46 @@ const edad = document.getElementById('edad');
 const imgUrl = document.getElementById('imgPerfilUser');
 
 
+btnEditar.addEventListener('click', () => {
+  document.getElementById('input_img').click();
+});
+
 btnGuardar.addEventListener('click',() => {
-  if(!emailValido(email.value)){
-    //Alerta con SweetAlert
-    return Swal.fire({
-      title: 'Ingrese un mail válido',
-      icon: 'error',
-      confirmButtonText: 'Ok'
-    });
-  }
   if(chequarVacio()){
     //Se guardan los datos en el caso de no que estén los campos vacíos
-    guardarUsuario({email: email.value, nombre: nombre.value, apellido: apellido.value, conectado: true, imgUrl: imgUrl.src, telefono: telefono.value,edad: edad.value});
-    return Swal.fire({
-      title: 'Cambios guardados con exito!',
-      icon: 'success',
-      confirmButtonText: 'Ok'
-    });
+    if(!emailValido(email.value)){
+      //Alerta con SweetAlert en caso de que no sea un email válido
+      return Swal.fire({
+        title: 'Ingrese un mail válido',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+    }else{
+      if(telefonoValido()){
+        if(edadValida()){
+          const user = {email: email.value, nombre: nombre.value, apellido: apellido.value, conectado: true, imgUrl: imgUrl.src, telefono: telefono.value,edad: edad.value};
+          guardarUsuario(user);
+          mostrarUsuario(user);
+          return Swal.fire({
+            title: 'Cambios guardados con exito!',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
+        }else{
+          return Swal.fire({
+            title: 'Ingrese una edad válida',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
+    }else{
+      return Swal.fire({
+        title: 'Número de teléfono no válido',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+    }
+  }
   }else{
     //Alerta con SweetAlert
     return Swal.fire({
@@ -34,6 +58,19 @@ btnGuardar.addEventListener('click',() => {
   }
 });
 
+function chequarVacio(){ // Devuelvo false si hay algún campo vacio
+  return edad.value != 0 && telefono.value != 0 && email.value.trim() != '' && apellido.value.trim() != '' && nombre.value.trim() != '';
+}
+
+function edadValida(){ // Devuelvo false si la edad es negativa o nula
+  return edad.value > 0 && edad.value < 200;
+}
+
+function telefonoValido(){ // Devuelvo false en el caso que no sea válido (respondiendo al formato uruguayo)
+  const telString = telefono.value.toString().split(' ').join('').length;
+  return telString == 9;
+}
+
 function guardarUsuario(user){
   const recordar= localStorage.getItem('recordar');
   if(recordar === 'true'){
@@ -41,11 +78,6 @@ function guardarUsuario(user){
   }else{
     sessionStorage.setItem('user',JSON.stringify(user));
   }
-}
-
-function chequarVacio(){ // Devuelvo false si hay algún campo vacio
-  return nombre.value.trim() != '';
-  // return nombre.value.trim() != '' || apellido.value.trim() != '' || email.value.trim() != '' || telefono.value. != 0 || edad.value != 0;
 }
 
 function cargarInfoUsuario(){
@@ -58,13 +90,6 @@ function cargarInfoUsuario(){
     telefono.value = usuario.telefono;
     edad.value = usuario.edad;
   }
-}
-
-function darFormatoInputs(){
-  let cleave = new Cleave('#telefono', {
-    phone: true,
-    phoneRegionCode: 'UY'
-  });
 }
 
 function cambioArchivo(){
@@ -82,7 +107,6 @@ function cambioArchivo(){
       "data": form
    };
 
-
    $.ajax(settings).done(function(response) {
       const respuesta = JSON.parse(response);
       let user = traerUsuario();
@@ -90,7 +114,15 @@ function cambioArchivo(){
       console.log(user);
       guardarUsuario(user);
       cargarInfoUsuario();
+      mostrarUsuario(user);
    });
+}
+
+function darFormatoInputs(){
+  let cleave = new Cleave('#telefono', {
+    phone: true,
+    phoneRegionCode: 'UY'
+  });
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {

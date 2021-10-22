@@ -14,7 +14,9 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/dropzone.css" rel="stylesheet">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -31,11 +33,7 @@
       }
     }
   </style>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link href="css/dropzone.css" rel="stylesheet">
 </head>
-
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
@@ -67,12 +65,12 @@
     <div class="pt-2">
       <div class="row justify-content-center">
         <div class="col-8 mr-5">
-          <img id="imgPerfilUser" class="img-responsive border rounded-circle" src="img/profileUser.png" alt="imgPerfilUser" style="object-fit:cover; max-height:140px; max-width:120px; margin-left: auto; margin-right: auto;">
-          <button class="btn btn-primary shadow" style="border-radius: 50%; position:absolute; left: 12%; top: 60%; backg" class="btn"><i class="fas fa-pencil-alt" style="color: white;"></i></button>
+          <img id="imgPerfilUser" class="img-responsive border rounded-circle" src="img/profileUser.png" alt="imgPerfilUser" style="object-fit:cover; height:120px; width:120px; margin-left: auto; margin-right: auto;">
+          <button id="btnEditarImg" class="btn btn-primary shadow" style="border-radius: 50%; position:absolute; left: 12%; top: 60%; backg" class="btn"><i class="fas fa-pencil-alt" style="color: white;"></i></button>
+          <input id="input_img" onchange="cambioArchivo()" accept="image/*" type="file" style="display:none" multiple/>
         </div>
       </div>
       <form>
-        <input type="file" id="input_img" onchange="cambioArchivo()" accept="image/*">
         <div class="form-row pt-3">
           <div class="form-group col-md-2">
             <label for="nombre">Nombre</label>
@@ -94,13 +92,13 @@
         <div class="form-row pt-3">
           <div class="form-group col-md-5">
             <label for="telefono">Teléfono de contacto</label>
-            <input id="telefono" type="text" class="form-control" placeholder="Teléfono">
+            <input id="telefono" type="text" class="form-control" maxlength="11" placeholder="Teléfono">
           </div>
         </div>
         <div class="form-row pt-3">
           <div class="form-group col-md-2">
             <label for="edad">Edad</label>
-            <input id="edad" type="number" min="1" class="form-control" placeholder="Edad">
+            <input id="edad" type="number" min="1" max="200" class="form-control" placeholder="Edad">
           </div>
         </div>
         <div class="pt-3 pb-3">

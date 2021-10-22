@@ -45,7 +45,7 @@ const getJSONData = (url) => {
 
 function mostrarUsuario(user){
   document.getElementById('userProfile').src = user.imgUrl;
-  document.getElementById('userName').innerHTML = user.nombre;
+  document.getElementById('userName').innerHTML = `${user.nombre} ${user.apellido}`;
 }
 
 function verificarPagina(user){

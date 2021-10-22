@@ -12,25 +12,19 @@ function mostrarProductos(criterio,productos){
     let contenidoHtml = "";
     for(product of productos){
       contenidoHtml += `
-      <a href="product-info.html" class="list-group-item list-group-item-action">
-          <div class="row">
-              <div class="col-3">
-                  <img src="` + product.imgSrc + `" alt="` + product.desc + `" class="img-thumbnail">
+          <div class="col-md-4 py-2">
+            <a href="product-info.html" class="list-group-item-action">
+            <div class="card h-100">
+              <img class="card-img-top" src="${product.imgSrc}" alt="${product.name}">
+              <div class="card-body">
+                <h4 class="card-title">${product.name}</h4>
+                <p class="card-text">${product.description}</p>
+                <h5 class="text-dark"><b>${product.currency} ${product.cost}</b></h5>
+                <small class="text-muted">${product.soldCount} vendido(s)</small>
               </div>
-              <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                      <h4 class="mb-1">`+ product.name +`</h4>
-                      <small class="text-muted">` + product.soldCount + ` vendidos</small>
-                  </div>
-                  <div class="d-flex w-100 justify-content-between">
-                      <p class="mb-1">`+ product.description +`</p>
-                  </div>
-                  <div class="pt-5 d-flex w-100 justify-content-between">
-                      <h5 class="">`+ product.cost +` ` + product.currency + `</h5>
-                  </div>
-              </div>
+            </div>
+            </a>
           </div>
-      </a>
       `;
     }
     document.getElementById("cat-list-container").innerHTML = contenidoHtml;
