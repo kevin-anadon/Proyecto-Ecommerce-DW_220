@@ -7,6 +7,8 @@ let carrito = {};
 let mapa = null;
 let marker = null;
 
+const inputsMetPagoTarjeta = document.getElementsByClassName('tarjetaInputs');
+const inputsMetPagoBanco = document.getElementsByClassName('bancoInputs');
 const radioButtons = document.getElementsByClassName('rbtns');
 
 for (rBtn of radioButtons) { //Añado para cada radio button un addEventListener
@@ -168,16 +170,78 @@ function traerCarrito(){
   });
 }
 
-function comprar(){
+function checkEnvioVacio(){
   for (elemento of document.getElementsByClassName('envioForms')){ // Por cada elemento del apartado de envío reviso que no estén vacios
     if(elemento.value.trim() == '' && !document.getElementById('chkMapa').checked){
-      //Alerta con SweetAlert
-      return Swal.fire({
-        title: 'Debe completar los campos de envío',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      });
+      return false;
     }
+  }
+  return true
+}
+
+function checkMetPagoVacio(){
+  //Compruebo que el usuario haya elegido un método de pago
+  let check = true;
+  for (const inputBanco of inputsMetPagoBanco) {
+    if (inputBanco.parentNode.parentNode.style.display !== 'none'){
+      if(inputBanco.value.trim() == 0 || inputBanco.value.trim() === ''){
+        check = false;
+      }
+    }
+  }
+
+  for (const inputTarjeta of inputsMetPagoTarjeta) {
+    const rowInput = Array.from(inputTarjeta.className.split(' ')).find( clase => clase == 'rowInput');
+    let divContainer = inputTarjeta.parentNode.parentNode;
+
+    if(rowInput){
+      divContainer = divContainer.parentNode;
+    }
+
+    if (divContainer.style.display !== 'none'){
+      if(inputTarjeta.value.trim() == 0 || inputTarjeta.value.trim() === ''){
+        check = false;
+      }
+    }
+    }
+    return check;
+}
+
+function comprar(){
+  if(!checkEnvioVacio()){
+    return Swal.fire({
+      title: 'Debe completar los campos de envío',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
+  }else if (!checkMetPagoVacio()) {
+    return Swal.fire({
+      title: 'Debe seleccionar un método de pago',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
+  }
+  return Swal.fire({
+    title: 'Compra realizada con éxito',
+    icon: 'success',
+    confirmButtonText: 'Ok'
+  });
+}
+
+function activarOpcionModal(event){
+  const metodoPago = event.target.value;
+  const tarjeta = document.getElementById('tarjeta-container');
+  const banco = document.getElementById('banco-container');
+  switch (metodoPago) {
+    case 'tarjeta':
+      banco.style = 'display:none;';
+      tarjeta.style.display = null;
+    break;
+
+    case 'banco':
+      banco.style.display = null;
+      tarjeta.style = 'display:none;';
+    break;
   }
 }
 
@@ -207,9 +271,11 @@ function obtenerDireccion(event){
     const coordenadas = navigator.geolocation.getCurrentPosition(({coords}) => {
       cargarMapa([coords.latitude,coords.longitude]);
     });
+    formEnviar.style.pointerEvents = 'none'
     formEnviar.className = 'transparente';
   }else{
     leafletMap.style.height = '0px';
+    formEnviar.style.pointerEvents = null;
     formEnviar.classList.remove('transparente');
   }
 }
@@ -242,7 +308,77 @@ function clickMap(event){
   marker = L.marker(event.latlng).addTo(mapa);
 }
 
+function activarTooltips(){
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+}
+
+function formatearInputs(){
+  const imgLogo = document.getElementById('logoCard');
+  const tarjeta = new Cleave('#nro-tarjeta', {
+    creditCard: true,
+    onCreditCardTypeChanged: (type) => {
+       if(type !== 'unknown'){
+         imgLogo.style.display = null;
+       }
+       switch (type) { // Seteo el logo de la tarjeta según el tipo
+         case 'mastercard':
+          imgLogo.src = './img/logo-Mastercard.png';
+         break;
+
+         case 'visa':
+          imgLogo.src = './img/logo-Visa.png';
+         break;
+
+         case 'diners':
+          imgLogo.src = './img/logo-Diners.png';
+         break;
+
+         case 'amex':
+          imgLogo.src = './img/logo-Amex.png';
+         break;
+
+         case 'discover':
+          imgLogo.src = './img/logo-Discover.png';
+         break;
+
+         case 'jcb':
+          imgLogo.src = './img/logo-Jcb.png';
+         break;
+
+         case 'uatp':
+          imgLogo.src = './img/logo-Uatp.png';
+         break;
+
+         case 'instapayment':
+          imgLogo.src = './img/logo-Instapayment.png';
+         break;
+
+         case 'mir':
+          imgLogo.src = './img/logo-Mir.png';
+         break;
+
+         case 'unionPay':
+          imgLogo.src = './img/logo-Unionpay.png';
+         break;
+
+         default:
+          imgLogo.style.display = 'none'
+         break;
+       }
+    }
+  });
+
+  const vencimiento = new Cleave('#fecha-tarjeta',{
+    date: true,
+    datePattern: ['m', 'Y']
+  });
+}
+
 document.addEventListener("DOMContentLoaded", (e) => {
   traerCarrito();
   traerPaises();
+  activarTooltips();
+  formatearInputs();
 });

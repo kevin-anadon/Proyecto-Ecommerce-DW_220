@@ -39,6 +39,7 @@ function iniciarConGoogle(googleUser) {
       // The ID token you need to pass to your backend:
       var id_token = googleUser.getAuthResponse().id_token;
       */
+
       // Variable que contiene al usuario de google
       const profile = googleUser.getBasicProfile();
       crearUsuario(profile.getEmail(),profile.getGivenName(),profile.getFamilyName(),profile.getImageUrl());

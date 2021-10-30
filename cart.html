@@ -131,22 +131,101 @@
       </div>
         <div class="pl-2 pt-3">
           <div class="custom-control custom-radio">
-            <input id="goldradio" value="0.13" name="publicationType" type="radio" class="rbtns custom-control-input" checked="" required="">
-            <label class="custom-control-label" for="goldradio">Premium (13%)</label>
+            <input id="premiumradio" value="0.13" name="publicationType" type="radio" class="rbtns custom-control-input" checked="" required="">
+            <label class="custom-control-label" data-toggle="tooltip" data-placement="top" data-html="true" title="<em>Tiempo de entrega aprox: </em><b>2-5</b><em></em> días" for="premiumradio" title="">Premium (15%)</label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="premiumradio" value="0.07" name="publicationType" type="radio" class="rbtns custom-control-input" required="">
-            <label class="custom-control-label" for="premiumradio">Express (7%)</label>
+            <input id="expressradio" value="0.07" name="publicationType" type="radio" class="rbtns custom-control-input" required="">
+            <label class="custom-control-label" for="expressradio" data-toggle="tooltip" data-placement="top" data-html="true" title="<em>Tiempo de entrega aprox: </em><b>5-8</b><em></em> días">Express (7%)</label>
           </div>
           <div class="custom-control custom-radio">
             <input id="standardradio" value="0.05" name="publicationType" type="radio" class="rbtns custom-control-input" required="">
-            <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
+            <label class="custom-control-label" for="standardradio" data-toggle="tooltip" data-placement="top" data-html="true" title="<em>Tiempo de entrega aprox: </em><b>12-15</b><em></em> días">Estándar (5%)</label>
           </div>
         </div>
     </div>
     <div class="pt-5">
-      <button id="btnMetodoPago" class="btn btn-outline-secondary" onclick="//metodoPago()">Elegir método de pago</button>
+      <button id="btnMetodoPago" class="btn btn-outline-secondary" data-toggle="modal" data-target="#formPagoModal">Elegir método de pago</button>
     </div>
+
+    <div class="modal fade" id="formPagoModal" tabindex="-1" role="dialog" aria-labelledby="formPagoModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliga un método de pago</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="custom-control custom-radio">
+                  <input id="rbtnTarjeta" value="tarjeta" onchange="activarOpcionModal(event)" name="metPago" class="custom-control-input" type="radio" checked="">
+                  <label class="custom-control-label" for="rbtnTarjeta">Tarjeta de crédito o débito</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input id="rbtnBanco" value="banco" name="metPago" onchange="activarOpcionModal(event)" class="custom-control-input" type="radio">
+                  <label class="custom-control-label" for="rbtnBanco">Transferencia bancaria</label>
+                </div>
+                <div id="tarjeta-container" class="p-2">
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                    <div class="col-6">
+                    </div>
+                    <div class="col">
+                      <img id="logoCard" src=""style="width:60px;height:50px;display:none;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="nro-tarjeta">Número de tarjeta</label>
+                    <input id="nro-tarjeta" class="form-control tarjetaInputs" type="text">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="nombre-tarjeta">Propietario</label>
+                      <input id="nombre-tarjeta" class="form-control tarjetaInputs rowInput" type="text">
+                    </div>
+                    <div class="form-group col-md-5">
+                      <label for="fecha-tarjeta">Fecha de vencimiento</label>
+                      <input id="fecha-tarjeta" class="form-control tarjetaInputs rowInput" type="text" placeholder="Mes/Año">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="cvv-tarjeta">CVV</label>
+                      <input id="cvv-tarjeta" class="form-control tarjetaInputs rowInput" min=1 max="999" maxlength="3" type="number">
+                    </div>
+                  </div>
+                </div>
+                <div id="banco-container" class="p-2" style="display:none;">
+                  <div class="form-group">
+                    <label for="nombre-banco">Nombre del banco</label>
+                    <input id="nombre-banco" class="form-control bancoInputs" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="nombreDueño-banco">Nombre del dueño de la cuenta</label>
+                    <input id="nombreDueño-banco" class="form-control bancoInputs" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="ci-banco">Cédula de identidad</label>
+                    <input id="ci-banco" class="form-control bancoInputs" type="text" maxlength="8">
+                  </div>
+                  <div class="form-group">
+                    <label for="nro-banco">Número de cuenta</label>
+                    <input id="nro-banco" class="form-control bancoInputs" type="number">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3 class="pt-4">Costos</h3>
     <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -188,6 +267,7 @@
   <script src="js/google.js"></script>
   <script src="js/facebook.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""></script>
