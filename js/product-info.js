@@ -19,8 +19,8 @@ function crearCarousel(){
   for(let img of productoActual.images){
     let active = i== 1 ? 'active' : '';
     carousel += `
-      <div class="carousel-item ${active}">
-        <img class="d-block w-100" src="${img}" alt="${i} slide">
+      <div class="carousel-item ${active} image-container">
+        <img class="d-block w-100 image-zoom" data-zoom="{{${img} | img_url: '1024x1024', scale: 2}}" src="${img}" alt="${i} slide">
       </div>`;
     ++i;
   }
@@ -223,6 +223,17 @@ function traerComentarios(){
   });
 }
 
+function setZoomImg(){
+  // Configuro el zoom en la imagen del carrousel
+  $('.image-zoom')
+  .wrap('<span style="display:inline-block"></span>')
+  .css('display', 'block')
+  .parent()
+  .zoom({
+    url: $(this).find('img').attr('data-zoom')
+  });
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -232,6 +243,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       productoActual = resultObj.data;
       mostrarProducto();
       traerProductos();
+      setZoomImg();
       document.getElementById('img-profile-comment').src = traerUsuario().imgUrl; //Seteo foto de perfil en añadir comentario
       traerComentarios();
     }
