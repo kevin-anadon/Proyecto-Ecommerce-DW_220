@@ -10,6 +10,7 @@ let marker = null;
 const inputsMetPagoTarjeta = document.getElementsByClassName('tarjetaInputs');
 const inputsMetPagoBanco = document.getElementsByClassName('bancoInputs');
 const radioButtons = document.getElementsByClassName('rbtns');
+const forms = document.getElementsByClassName('needs-validation');
 
 for (rBtn of radioButtons) { //Añado para cada radio button un addEventListener
   rBtn.addEventListener('change', (event) => {
@@ -268,7 +269,8 @@ function obtenerDireccion(event){
   let formEnviar = document.getElementById('form-envio');
   if(event.target.checked){
     leafletMap.style.height = '34vh';
-    const coordenadas = navigator.geolocation.getCurrentPosition(({coords}) => {
+    // Traigo las coordenadas y las cargo al mapa
+    navigator.geolocation.getCurrentPosition( ({coords}) => {
       cargarMapa([coords.latitude,coords.longitude]);
     });
     formEnviar.style.pointerEvents = 'none'
@@ -376,9 +378,23 @@ function formatearInputs(){
   });
 }
 
+function setValidForms(){
+  for (const form of forms) {
+    form.addEventListener('submit',(event) => {
+      comprar();
+      if(!document.getElementById('chkMapa').checked){
+        form.classList.add('was-validated');
+      }
+      event.preventDefault();
+      event.stopPropagation();
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", (e) => {
   traerCarrito();
   traerPaises();
   activarTooltips();
   formatearInputs();
+  setValidForms();
 });
